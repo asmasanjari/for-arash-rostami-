@@ -1,13 +1,824 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="fa" dir="rtl">
+
 <head>
-    <title>Voice Memory</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>برای تو، در روز تولدت ❤️</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family: Tahoma, Arial, sans-serif;
+
+            color: white;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                radial-gradient(
+                    circle at 50% 40%,
+                    #65152c 0%,
+                    #3b0b1b 28%,
+                    #1b050d 65%,
+                    #080306 100%
+                );
+
+        }
+
+
+        /* نورهای محو پس زمینه */
+
+        .light {
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            border-radius: 50%;
+
+            background: rgba(160, 25, 61, 0.18);
+
+            filter: blur(100px);
+
+            animation: lightMove 8s ease-in-out infinite alternate;
+
+        }
+
+
+        .light.one {
+
+            top: -180px;
+            right: -150px;
+
+        }
+
+
+        .light.two {
+
+            bottom: -220px;
+            left: -150px;
+
+            animation-delay: 3s;
+
+        }
+
+
+        @keyframes lightMove {
+
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.35);
+            }
+
+        }
+
+
+        /* ذرات نور */
+
+        .particle {
+
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            background: #d9b56a;
+
+            border-radius: 50%;
+
+            opacity: 0;
+
+            animation: sparkle 5s linear infinite;
+
+        }
+
+
+        .particle:nth-child(1) {
+            top: 15%;
+            left: 15%;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(2) {
+            top: 30%;
+            left: 80%;
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(3) {
+            top: 70%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(4) {
+            top: 80%;
+            left: 75%;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(5) {
+            top: 20%;
+            left: 55%;
+            animation-delay: 0.5s;
+        }
+
+
+        @keyframes sparkle {
+
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.5);
+            }
+
+        }
+
+
+        /* قلب های شناور */
+
+        .heart {
+
+            position: absolute;
+
+            bottom: -40px;
+
+            color: rgba(211, 170, 91, 0.35);
+
+            font-size: 18px;
+
+            animation: floatingHeart 10s linear infinite;
+
+        }
+
+
+        .heart:nth-of-type(6) {
+            left: 8%;
+            animation-delay: 1s;
+        }
+
+        .heart:nth-of-type(7) {
+            left: 25%;
+            animation-delay: 4s;
+        }
+
+        .heart:nth-of-type(8) {
+            left: 48%;
+            animation-delay: 2s;
+        }
+
+        .heart:nth-of-type(9) {
+            left: 72%;
+            animation-delay: 5s;
+        }
+
+        .heart:nth-of-type(10) {
+            left: 90%;
+            animation-delay: 3s;
+        }
+
+
+        @keyframes floatingHeart {
+
+            0% {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+                opacity: 0;
+
+            }
+
+            15% {
+                opacity: 0.7;
+            }
+
+            100% {
+
+                transform:
+                    translateY(-115vh)
+                    rotate(35deg);
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+        /* کارت */
+
+        .card {
+
+            position: relative;
+
+            width: min(90%, 450px);
+
+            padding: 50px 35px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(74, 11, 27, 0.82),
+                    rgba(19, 4, 10, 0.88)
+                );
+
+            border: 1px solid rgba(214, 171, 91, 0.28);
+
+            border-radius: 32px;
+
+            backdrop-filter: blur(22px);
+
+            -webkit-backdrop-filter: blur(22px);
+
+            box-shadow:
+
+                0 35px 100px rgba(0, 0, 0, 0.65),
+
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+
+                0 0 70px rgba(111, 13, 39, 0.18);
+
+            animation: cardEntrance 1.4s ease;
+
+            z-index: 10;
+
+        }
+
+
+        @keyframes cardEntrance {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(35px)
+                    scale(0.94);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* خط طلایی */
+
+        .line {
+
+            width: 70px;
+
+            height: 1px;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #d8b15d,
+                transparent
+            );
+
+            margin: 0 auto 25px;
+
+        }
+
+
+        /* قلب */
+
+        .main-heart {
+
+            font-size: 42px;
+
+            color: #d8b15d;
+
+            margin-bottom: 18px;
+
+            filter:
+                drop-shadow(
+                    0 0 18px
+                    rgba(216, 177, 93, 0.35)
+                );
+
+            animation: heartbeat 2s infinite;
+
+        }
+
+
+        @keyframes heartbeat {
+
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            10% {
+                transform: scale(1.12);
+            }
+
+            20% {
+                transform: scale(1);
+            }
+
+            30% {
+                transform: scale(1.08);
+            }
+
+        }
+
+
+        /* عنوان */
+
+        .small-title {
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            color: #c9a45a;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        h1 {
+
+            font-size: 29px;
+
+            font-weight: normal;
+
+            line-height: 1.7;
+
+            color: #f1d58c;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .subtitle {
+
+            color: #d3bfc3;
+
+            font-size: 14px;
+
+            line-height: 2.2;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        /* دکمه */
+
+        .play-button {
+
+            width: 96px;
+
+            height: 96px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(225, 187, 101, 0.7);
+
+            background:
+
+                radial-gradient(
+                    circle at 35% 30%,
+                    #9c2748,
+                    #5c1029 65%,
+                    #380819
+                );
+
+            color: #e5c475;
+
+            font-size: 27px;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 25px;
+
+            box-shadow:
+
+                0 0 0 9px rgba(214, 171, 91, 0.04),
+
+                0 0 0 18px rgba(214, 171, 91, 0.025),
+
+                0 15px 45px rgba(0, 0, 0, 0.5);
+
+            transition: all 0.35s ease;
+
+        }
+
+
+        .play-button:hover {
+
+            transform: scale(1.08);
+
+            box-shadow:
+
+                0 0 0 12px rgba(214, 171, 91, 0.05),
+
+                0 0 45px rgba(214, 171, 91, 0.25);
+
+        }
+
+
+        .play-button:active {
+
+            transform: scale(0.94);
+
+        }
+
+
+        /* موج صدا */
+
+        .wave {
+
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 4px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .bar {
+
+            width: 3px;
+
+            height: 7px;
+
+            border-radius: 10px;
+
+            background: #cda95b;
+
+            transition: 0.2s;
+
+        }
+
+
+        .playing .bar {
+
+            animation: soundWave 0.7s ease-in-out infinite alternate;
+
+        }
+
+
+        .playing .bar:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .playing .bar:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .playing .bar:nth-child(3) {
+            animation-delay: 0.25s;
+        }
+
+        .playing .bar:nth-child(4) {
+            animation-delay: 0.35s;
+        }
+
+        .playing .bar:nth-child(5) {
+            animation-delay: 0.2s;
+        }
+
+        .playing .bar:nth-child(6) {
+            animation-delay: 0.3s;
+        }
+
+        .playing .bar:nth-child(7) {
+            animation-delay: 0.1s;
+        }
+
+
+        @keyframes soundWave {
+
+            from {
+                height: 6px;
+            }
+
+            to {
+                height: 31px;
+            }
+
+        }
+
+
+        .status {
+
+            color: #a99499;
+
+            font-size: 12px;
+
+            min-height: 20px;
+
+        }
+
+
+        /* پایین کارت */
+
+        .footer {
+
+            margin-top: 32px;
+
+            color: rgba(226, 194, 126, 0.45);
+
+            font-size: 11px;
+
+        }
+
+
+        /* موبایل */
+
+        @media (max-width: 500px) {
+
+            .card {
+
+                padding: 42px 24px;
+
+            }
+
+            h1 {
+
+                font-size: 25px;
+
+            }
+
+            .play-button {
+
+                width: 86px;
+                height: 86px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-<h1>Voice Memory</h1>
 
-<p>My voice message</p>
+    <!-- نورها -->
+
+    <div class="light one"></div>
+    <div class="light two"></div>
+
+
+    <!-- ذرات -->
+
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+
+    <!-- قلب های شناور -->
+
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+
+
+    <!-- کارت اصلی -->
+
+    <main class="card">
+
+
+        <div class="main-heart">
+            ♥
+        </div>
+
+
+        <div class="small-title">
+            FOR YOU
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <h1>
+            تولدت مبارک، عشق من
+        </h1>
+
+
+        <p class="subtitle">
+
+            امروز فقط روز تولد تو نیست...<br>
+
+            روزیه که دنیا یکی از قشنگ‌ترین
+            آدم‌هاشو به خودش دید. ❤️
+
+        </p>
+
+
+        <!-- دکمه ویس -->
+
+        <button
+            class="play-button"
+            id="playButton">
+
+            ▶
+
+        </button>
+
+
+        <!-- موج صدا -->
+
+        <div
+            class="wave"
+            id="wave">
+
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+
+        </div>
+
+
+        <div
+            class="status"
+            id="status">
+
+            برای شنیدن چیزی که از ته دلم برات گفتم، لمس کن
+
+        </div>
+
+
+        <div class="footer">
+
+            با عشق، برای خاص‌ترین آدم زندگی من
+
+        </div>
+
+
+    </main>
+
+
+    <!-- ویس -->
+
+    <audio id="voice">
+
+        <source
+            src="voice.mp3"
+            type="audio/mpeg">
+
+    </audio>
+
+
+    <script>
+
+
+        const voice =
+            document.getElementById("voice");
+
+
+        const playButton =
+            document.getElementById("playButton");
+
+
+        const wave =
+            document.getElementById("wave");
+
+
+        const status =
+            document.getElementById("status");
+
+
+        playButton.addEventListener(
+            "click",
+            function () {
+
+
+                if (voice.paused) {
+
+
+                    voice.play();
+
+
+                    playButton.innerHTML = "❚❚";
+
+
+                    wave.classList.add("playing");
+
+
+                    status.innerHTML =
+                        "حالا نوبت توئه که فقط گوش بدی... ❤️";
+
+
+                }
+
+                else {
+
+
+                    voice.pause();
+
+
+                    playButton.innerHTML = "▶";
+
+
+                    wave.classList.remove("playing");
+
+
+                    status.innerHTML =
+                        "ویس متوقف شد";
+
+
+                }
+
+            }
+        );
+
+
+        voice.addEventListener(
+            "ended",
+            function () {
+
+
+                playButton.innerHTML = "▶";
+
+
+                wave.classList.remove("playing");
+
+
+                status.innerHTML =
+                    "برای شنیدن دوباره لمس کن ❤️";
+
+
+            }
+        );
+
+
+    </script>
+
 
 </body>
+
 </html>
+```
