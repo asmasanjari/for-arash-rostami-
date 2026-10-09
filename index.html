@@ -821,3 +821,197 @@
 </body>
 
 </html>
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Only You ♥</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ background:#030203;color:#a51c43;
+ min-height:100vh;overflow-x:hidden;
+ font-family:Georgia,"Times New Roman",serif
+}
+#intro{
+ position:fixed;inset:0;z-index:5;background:#030203;
+ display:flex;align-items:center;justify-content:center;
+ flex-direction:column;gap:25px;text-align:center;
+ transition:opacity 1s
+}
+#intro h1{
+ font-size:clamp(25px,6vw,42px);
+ line-height:1.6;letter-spacing:3px;
+ text-shadow:0 0 25px #a51c43
+}
+button{
+ background:#260611;color:#edb6c6;
+ border:1px solid #8e1c40;border-radius:40px;
+ padding:14px 25px;cursor:pointer
+}
+#universe{
+ display:none;min-height:100vh;flex-direction:column;
+ align-items:center;padding:35px 8px
+}
+h2{
+ text-align:center;color:#c02b53;
+ font-size:clamp(25px,6vw,40px);
+ letter-spacing:3px;
+ animation:glow 2s infinite alternate
+}
+.sub{
+ color:#853047;font:11px Arial;
+ letter-spacing:2px;margin:12px 0
+}
+#heart{
+ width:min(96vw,540px);height:min(96vw,540px);
+ position:relative;flex-shrink:0
+}
+.word{
+ position:absolute;transform:translate(-50%,-50%);
+ white-space:nowrap;font-size:clamp(7px,1.8vw,12px);
+ color:#a51c43;opacity:0;
+ text-shadow:0 0 8px #a51c4366;
+ animation:appear .8s ease forwards
+}
+.word.hot{color:#e34b76;text-shadow:0 0 12px #cf2858}
+#message{
+ color:#c02b53;text-align:center;
+ font-size:clamp(18px,4vw,26px);
+ line-height:2;min-height:90px;
+ margin:0 8px 20px;transition:opacity .5s
+}
+#replay{margin:15px}
+#status{font:11px Arial;color:#652137;margin:10px}
+@keyframes appear{
+ from{opacity:0;filter:blur(4px);transform:translate(-50%,-50%) scale(.5)}
+ to{opacity:1;filter:blur(0);transform:translate(-50%,-50%) scale(1)}
+}
+@keyframes glow{
+ from{text-shadow:0 0 8px #8e1c40}
+ to{text-shadow:0 0 30px #cf2858}
+}
+</style>
+</head>
+<body>
+
+<div id="intro">
+ <h1>ONE HEART<br>IN A MILLION WORDS</h1>
+ <button id="start">برای دیدن سورپرایزت لمس کن ♥</button>
+</div>
+
+<main id="universe">
+ <h2>I LOVE YOU</h2>
+ <p class="sub">IN EVERY LANGUAGE · IN EVERY UNIVERSE</p>
+ <div id="heart"></div>
+ <div id="message"></div>
+ <p id="status">JUST FOR YOU · FOREVER ♥</p>
+ <button id="replay">دوباره از اول ببین ♥</button>
+ <audio id="song" src="song.mp3" preload="auto"></audio>
+</main>
+
+<script>
+const words=[
+"I LOVE YOU","TE AMO","JE T'AIME","SARANGHAE",
+"사랑해","愛してる","我爱你","Я ТЕБЯ ЛЮБЛЮ",
+"TI AMO","ICH LIEBE DICH","EU TE AMO","أحبك",
+"دوستت دارم","SENI SEVIYORUM","Mahal kita",
+"Kocham Cię","Ik hou van jou","Σ' αγαπώ",
+"ฉันรักคุณ","Ngiyakuthanda","Szeretlek","Volim te",
+"Jeg elsker deg","Saya cinta kamu","Te iubesc",
+"Mi amas vin","Nakupenda","T'estimo","Mon amour",
+"MY LOVE","MY PERSON","FOREVER","ALWAYS YOU",
+"ONLY YOU","MI AMOR","MON CŒUR","CANIM",
+"عشقم","قلب من","I CHOOSE YOU","YOU AND ME",
+"MY FOREVER","♥","♥","♥"
+];
+
+const lines=[
+"I LOVE YOU",
+"دوستت دارم آرش من",
+"In every language",
+"In every lifetime",
+"It's always you ♥"
+];
+
+const intro=document.getElementById("intro");
+const universe=document.getElementById("universe");
+const heart=document.getElementById("heart");
+const song=document.getElementById("song");
+const message=document.getElementById("message");
+let timers=[];
+
+function later(fn,ms){
+ timers.push(setTimeout(fn,ms));
+}
+
+function buildHeart(){
+ heart.innerHTML="";
+ const size=heart.clientWidth;
+ const points=[];
+
+ for(let y=-1.15;y<=1.15;y+=.105){
+  for(let x=-1.25;x<=1.25;x+=.105){
+   const a=x*x+y*y-1;
+   if(a*a*a-x*x*y*y*y<=0) points.push({x,y});
+  }
+ }
+
+ points.sort((a,b)=>a.y-b.y);
+
+ points.forEach((p,i)=>{
+  const el=document.createElement("span");
+  el.className="word"+(i%9===0?" hot":"");
+  el.textContent=words[i%words.length];
+  el.style.left=(size*(.5+p.x/2.8))+"px";
+  el.style.top=(size*(.48+p.y/2.8))+"px";
+  el.style.animationDelay=(i*.025)+"s";
+  heart.appendChild(el);
+ });
+}
+
+function startExperience(){
+ timers.forEach(clearTimeout);
+ timers=[];
+ song.pause();
+ song.currentTime=0;
+ intro.style.opacity="0";
+
+ later(()=>{
+  intro.style.display="none";
+  universe.style.display="flex";
+  buildHeart();
+
+  song.play().catch(()=>{
+   document.getElementById("status").textContent=
+   "برای پخش آهنگ فایل song.mp3 را کنار love.html بگذار";
+  });
+
+  lines.forEach((line,i)=>{
+   later(()=>{
+    message.style.opacity="0";
+    later(()=>{
+     message.textContent=line;
+     message.style.opacity="1";
+    },500);
+   },2500*i);
+  });
+ },1000);
+}
+
+document.getElementById("start")
+ .addEventListener("click",startExperience);
+
+document.getElementById("replay")
+ .addEventListener("click",startExperience);
+
+window.addEventListener("resize",()=>{
+ if(universe.style.display==="flex") buildHeart();
+});
+</script>
+</body>
+</html>
+
