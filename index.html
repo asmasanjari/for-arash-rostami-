@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -371,6 +372,7 @@
     </div>
 
     <p class="heart-caption">My Man</p>
+
     <audio
             id="songAudio"
             src="voice_msg_-8775661277135758343.mp3.opus"
@@ -578,7 +580,10 @@
 
     /* انیمیشن: کلمه‌ها یکی‌یکی ظاهر می‌شوند و قلب را کامل می‌کنند */
     function startHeartAnimation() {
-        if (animationFrame) cancelAnimationFrame(animationFrame);
+        if (animationFrame !== null) {
+            cancelAnimationFrame(animationFrame);
+            animationFrame = null;
+        }
 
         resizeCanvas();
 
@@ -640,7 +645,15 @@
         animationFrame = requestAnimationFrame(animate);
     }
 
+    /* دکمه اجرای دوباره انیمیشن قلب */
     document.getElementById("replayButton").addEventListener("click", () => {
+        if (animationFrame !== null) {
+            cancelAnimationFrame(animationFrame);
+            animationFrame = null;
+        }
+
+        ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+
         startHeartAnimation();
     });
 
@@ -657,4 +670,4 @@
 
 </body>
 </html>
-
+```
